@@ -4,6 +4,7 @@ B = 1 # Abstand zwischen dem Bereich der maximalen Breite und der halben Länge 
 DL4 = 2 # Eidurchmesser (ein Viertel der Eilänge vom spitzen Ende entfernt)
 
 Term1 <- function(x,...) {
+  # TODO mind + - 
   B/2*((L^2-4*x^2)/(L^2+8*w*x+4*w^2))^.5
   }
 
