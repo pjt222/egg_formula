@@ -1,8 +1,8 @@
 L <- 8 # Eilänge
-w <- 7 # maximalen Breite
-B <- 3.5 # Abstand zwischen dem Bereich der maximalen Breite und der halben Länge des Eies
-DL4 <- 7 # Eidurchmesser (ein Viertel der Eilänge vom spitzen Ende entfernt)
-x <- seq(-L / 2, L / 2, by = .001)
+w <- 3.5 * 2 # maximalen Breite
+B <- 1.7 * 2 # Abstand zwischen dem Bereich der maximalen Breite und der halben Länge des Eies
+DL4 <- 3.3 *2 # Eidurchmesser (ein Viertel der Eilänge vom spitzen Ende entfernt)
+x <- seq(-L / 2, L / 2, by = .01)
 
 Term1 <- function(x, ...) {
   # TODO mind + -
