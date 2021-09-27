@@ -2,6 +2,7 @@ L <- 8 # Eilänge
 w <- 7 # maximalen Breite
 B <- 3.5 # Abstand zwischen dem Bereich der maximalen Breite und der halben Länge des Eies
 DL4 <- 7 # Eidurchmesser (ein Viertel der Eilänge vom spitzen Ende entfernt)
+x <- seq(-L / 2, L / 2, by = .001)
 
 Term1 <- function(x, ...) {
   # TODO mind + -
@@ -27,21 +28,15 @@ Term22 <- function(x, ...) {
   )^.5
 }
 
-x <- seq(-L / 2, L / 2, by = .001)
-y <- seq(-L / 2, L / 2, by = .001)
-
 Term2 <- 1 - Term21(x) * Term22(x)
 
 res <- Term1(x) * Term2
-z <- res
-
-# plot(x = x, y = res)
 
 egg_sclice <- data.frame(
-  x = x, 
+  x = x,
   y_p = res,
   y_n = -res
-  ) %>% 
+) %>%
   pivot_longer(
     cols = starts_with("y_"),
     names_to = "y_direction",
@@ -49,16 +44,16 @@ egg_sclice <- data.frame(
   )
 
 ggplot(
-    data = egg_sclice,
-    aes(
-      x = x, 
-      y = y,
-      color = y_direction
-      )
-  )+
+  data = egg_sclice,
+  aes(
+    x = x,
+    y = y,
+    color = y_direction
+  )
+) +
   geom_point() +
-  scale_x_continuous(limits = c(-L/2-1, L/2+1)) +
-  scale_y_continuous(limits = c(-L/2-1, L/2+1)) +
+  scale_x_continuous(limits = c(-L / 2 - 1, L / 2 + 1)) +
+  scale_y_continuous(limits = c(-L / 2 - 1, L / 2 + 1)) +
   scale_colour_viridis_d(guide = NULL) +
   theme_dark()
 
@@ -68,15 +63,15 @@ ggplot(
 #   z = -1:1,
 #   col = "#696969" #rainbow(1000)
 # )
-# 
+#
 # y2 <- function(x,...) {
 #   B/2*((L^2-4*x^2)/L)^.5*(
-#     (65.22*(w/L)^2-4.57*w/L+0.4+(102.61*(w/L)^2-13.67*w/L-0.39)*x/L+(x/L)^2) / 
+#     (65.22*(w/L)^2-4.57*w/L+0.4+(102.61*(w/L)^2-13.67*w/L-0.39)*x/L+(x/L)^2) /
 #       (107.91*(w/L)^2 - 9.16*w/L + 0.49+(375.88*(w/L)^2-39.6*w/L+0.31)*x/L+(302.37*(w/L)^2-41.83*w/L+2.07)*(w/L)^2)
 #   )^.5
-#   
+#
 # }
-# 
+#
 # y2s <- y2(seq(-L / 2, L / 2, by = .001))
-# 
+#
 # plot(x, y2s)
