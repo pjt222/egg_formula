@@ -2,7 +2,7 @@ L <- 8 # Eilänge
 w <- 3.5 * 2 # maximalen Breite
 B <- 1.7 * 2 # Abstand zwischen dem Bereich der maximalen Breite und der halben Länge des Eies
 DL4 <- 3.3 *2 # Eidurchmesser (ein Viertel der Eilänge vom spitzen Ende entfernt)
-x <- seq(-L / 2, L / 2, by = .01)
+x <- seq(-L / 2, L / 2, by = L * 0.01)
 
 Term1 <- function(x, ...) {
   # TODO mind + -
@@ -48,13 +48,17 @@ ggplot(
   aes(
     x = x,
     y = y,
-    color = y_direction
+    color = y_direction,
+    fill = y_direction,
+    alpha = .5
   )
 ) +
   geom_point() +
   scale_x_continuous(limits = c(-L / 2 - 1, L / 2 + 1)) +
   scale_y_continuous(limits = c(-L / 2 - 1, L / 2 + 1)) +
   scale_colour_viridis_d(guide = NULL) +
+  scale_fill_viridis_d(guide = NULL) +
+  scale_alpha(guide = NULL) +
   theme_dark()
 
 # rgl::plot3d(
