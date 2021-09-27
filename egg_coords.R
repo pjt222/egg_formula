@@ -12,7 +12,7 @@ Term1 <- function(x, ...) {
 
 Term21 <- function(x, ...) {
   (
-    (55*L^2 + 11 * L * w + 4 * w^2)^.5 * (3^.5 * B * L - 2 * DL4 * (L^2 + 2 * w * L + 4 * w^2)^.5)
+    (5.5*L^2 + 11 * L * w + 4 * w^2)^.5 * (3^.5 * B * L - 2 * DL4 * (L^2 + 2 * w * L + 4 * w^2)^.5)
   ) /
     (
       3^.5 * B * L * ((5.5 * L^2 + 11 * L * w + 4 * w^2)^.5 - 2 * (L^2 + 2 * w * L + 4 * w^2)^.5)
@@ -28,20 +28,18 @@ Term22 <- function(x, ...) {
   )^.5
 }
 
-x <- seq(1, 2, by = .1)
-y <- res
-# z
-
+x <- seq(0, 4, by = .1)
+y <- seq(0, 4, by = .1)
 
 Term2 <- 1 - Term21(x) * Term22(x)
 
 res <- Term1(x) * Term2
-
-plot(x= x, y = y)
+z <- res
+# plot(x= x, y = y)
 
 rgl::plot3d(
-  x = x,
-  y = y,
-  z = x,
+  x = c(-x, x),
+  y = c(-x, x),
+  z = c(z,z),
   col = rainbow(1000)
 )
