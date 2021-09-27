@@ -32,7 +32,7 @@ Term2 <- 1 - Term21(x) * Term22(x)
 
 res <- Term1(x) * Term2
 
-egg_sclice <- data.frame(
+egg_slice <- data.frame(
   x = x,
   y_p = res,
   y_n = -res
@@ -44,7 +44,7 @@ egg_sclice <- data.frame(
   )
 
 ggplot(
-  data = egg_sclice,
+  data = egg_slice,
   aes(
     x = x,
     y = y,
