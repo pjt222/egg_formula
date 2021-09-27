@@ -28,8 +28,20 @@ Term22 <- function(x, ...) {
   )^.5
 }
 
-Term2 <- 1 - Term21(seq(1, 2, by = .1)) * Term22(seq(1, 2, by = .1))
+x <- seq(1, 2, by = .1)
+y <- res
+# z
 
-res <- Term1(seq(1, 2, by = .1)) * Term2
 
-plot(x= seq(1, 2, by = .1), y = res)
+Term2 <- 1 - Term21(x) * Term22(x)
+
+res <- Term1(x) * Term2
+
+plot(x= x, y = y)
+
+rgl::plot3d(
+  x = x,
+  y = y,
+  z = x,
+  col = rainbow(1000)
+)
