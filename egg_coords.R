@@ -1,3 +1,5 @@
+library(tidyverse)
+
 L <- 8 # Eilänge
 w <- 3.5 * 2 # maximalen Breite
 B <- 1.7 * 2 # Abstand zwischen dem Bereich der maximalen Breite und der halben Länge des Eies
@@ -43,6 +45,26 @@ egg_slice <- data.frame(
     values_to = "y"
   )
 
+# TODO https://stackoverflow.com/questions/67236291/how-to-rotate-vector-time-series
+
+rotx <- function(
+  a # in radians, e.g. a = pi/4
+  ) {
+  # https://www.mathworks.com/help/phased/ref/rotx.html
+  # Counterclockwise rotation around x-axis
+  matrix(
+    c(
+      1,0,0,
+      0,cos(a),-sin(a),
+      0,sin(a),cos(a)
+      ),
+    nrow = 3,
+    ncol = 3,
+    byrow = TRUE
+  )
+}
+
+
 ggplot(
   data = egg_slice,
   aes(
@@ -61,12 +83,12 @@ ggplot(
   scale_alpha(guide = NULL) +
   theme_dark()
 
-# rgl::plot3d(
-#   x = x,
-#   y = res,
-#   z = -1:1,
-#   col = "#696969" #rainbow(1000)
-# )
+rgl::plot3d(
+  x = egg_slice$x,
+  y = egg_slice$y,
+  z = 0,#sin(egg_slice$y*2*pi),
+  col = "#696969" #rainbow(1000)
+)
 #
 # y2 <- function(x,...) {
 #   B/2*((L^2-4*x^2)/L)^.5*(
