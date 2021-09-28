@@ -3,7 +3,7 @@ library(tidyverse)
 L <- 8 # Eilänge
 w <- 3.5 * 2 # maximalen Breite
 B <- 1.7 * 2 # Abstand zwischen dem Bereich der maximalen Breite und der halben Länge des Eies
-DL4 <- 3.3 *2 # Eidurchmesser (ein Viertel der Eilänge vom spitzen Ende entfernt)
+DL4 <- 3.3 * 2 # Eidurchmesser (ein Viertel der Eilänge vom spitzen Ende entfernt)
 x <- seq(-L / 2, L / 2, by = L * 0.01)
 
 Term1 <- function(x, ...) {
@@ -36,8 +36,8 @@ res <- Term1(x) * Term2
 
 egg_slice <- data.frame(
   x = x,
-  y_p = res,
-  y_n = -res
+  y_p = res # ,
+  # y_n = -res
 ) %>%
   pivot_longer(
     cols = starts_with("y_"),
@@ -47,44 +47,52 @@ egg_slice <- data.frame(
 
 # TODO https://stackoverflow.com/questions/67236291/how-to-rotate-vector-time-series
 
-rotx <- function(
-  a # in radians, e.g. a = pi/4
-  ) {
+rotx <- function(a # in radians, e.g. a = pi/4
+) {
   # https://www.mathworks.com/help/phased/ref/rotx.html
   # Counterclockwise rotation around x-axis
   matrix(
     c(
-      1,0,0,
-      0,cos(a),-sin(a),
-      0,sin(a),cos(a)
-      ),
+      1, 0, 0,
+      0, cos(a), -sin(a),
+      0, sin(a), cos(a)
+    ),
     nrow = 3,
     ncol = 3,
     byrow = TRUE
   )
 }
 
+rots <- function(a # in radians, e.g. a = pi/4
+) {
+  matrix(
+    c(
+      cos(a), -sin(a),
+      sin(a), cos(a)
+    ),
+    nrow = 2,
+    ncol = 2,
+    byrow = F
+  )
+}
+
 egg_rotated <- lapply(1:NROW(egg_slice), function(es) {
   new_coords <- lapply(seq.default(0, 2, .25), function(theta) {
-    rotated <- c(unname(unlist(egg_slice[es,c("x","y")])),0) * rotx(theta)
-    
+    rotated <- c(unname(unlist(egg_slice[es, c("x", "y")])), 0) * rotx(theta)
+
     data.frame(
-      x = round(rowSums(rotated),2)[1],
-      y = round(rowSums(rotated),2)[2],
-      z = round(rowSums(rotated),2)[3],
+      x = round(rowSums(rotated), 2)[1],
+      y = round(rowSums(rotated), 2)[2],
+      z = round(rowSums(rotated), 2)[3],
       theta = theta
     )
-  }
-  )
+  })
   new_coords <- bind_rows(new_coords)
 })
 
-egg_rotated <- bind_rows(egg_rotated) %>% 
-  select(-theta) %>% 
+egg_rotated <- bind_rows(egg_rotated) %>%
+  select(-theta) %>%
   distinct()
-
-
-
 
 ggplot(
   data = egg_slice,
@@ -105,10 +113,10 @@ ggplot(
   theme_dark()
 
 rgl::plot3d(
-  x = egg_rotated$x,#egg_slice$x,
-  y = egg_rotated$y,#egg_slice$y,
-  z = egg_rotated$z,#0,#sin(egg_slice$y*2*pi),
-  col = "#696969" #rainbow(1000)
+  x = egg_rotated$x, # egg_slice$x,
+  y = egg_rotated$y, # egg_slice$y,
+  z = egg_rotated$z, # 0,#sin(egg_slice$y*2*pi),
+  col = "#696969" # rainbow(1000)
 )
 #
 # y2 <- function(x,...) {
