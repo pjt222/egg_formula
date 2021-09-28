@@ -66,7 +66,7 @@ rotx <- function(
 
 egg_rotated <- lapply(1:NROW(egg_slice), function(es) {
   new_coords <- lapply(seq.default(0, 2, .25), function(theta) {
-    rotated <- c(1,2,3) * rotx(theta)
+    rotated <- c(unname(unlist(egg_slice[es,c("x","y")])),0) * rotx(theta)
     
     data.frame(
       x = round(rowSums(rotated),2)[1],
@@ -77,10 +77,11 @@ egg_rotated <- lapply(1:NROW(egg_slice), function(es) {
   }
   )
   new_coords <- bind_rows(new_coords)
-  
 })
 
-
+egg_rotated <- bind_rows(egg_rotated) %>% 
+  select(-theta) %>% 
+  distinct()
 
 
 
@@ -104,9 +105,9 @@ ggplot(
   theme_dark()
 
 rgl::plot3d(
-  x = new_coords$x,#egg_slice$x,
-  y = new_coords$y,#egg_slice$y,
-  z = new_coords$z,#0,#sin(egg_slice$y*2*pi),
+  x = egg_rotated$x,#egg_slice$x,
+  y = egg_rotated$y,#egg_slice$y,
+  z = egg_rotated$z,#0,#sin(egg_slice$y*2*pi),
   col = "#696969" #rainbow(1000)
 )
 #
