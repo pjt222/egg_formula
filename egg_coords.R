@@ -71,7 +71,8 @@ all_egg_slices <- full_join(
   by = "x"
 ) %>% 
   mutate(
-    y = y * y_slice
+    y = y * y_slice,
+    z = y * z
   ) %>% 
   select(x,y,z)
 
