@@ -36,8 +36,8 @@ res <- Term1(x) * Term2
 
 egg_slice <- data.frame(
   x = x,
-  y_p = res # ,
-  # y_n = -res
+  y_p = res,
+  y_n = -res
 ) %>%
   pivot_longer(
     cols = starts_with("y_"),
