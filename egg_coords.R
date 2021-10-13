@@ -46,35 +46,26 @@ egg_slice <- data.frame(
   )
 
 slice_to_circle <- lapply(seq_along(egg_slice$x), function(u) {
-  
   tibble(
     theta_slice = seq.int(0, 360, 1),
     x = egg_slice[["x"]][u],
     y_slice = round(sin(theta_slice), 8),
     z = round(cos(theta_slice), 8)
   )
-  
 })
 
-slice_to_circle <- bind_rows(slice_to_circle) 
-# %>%
-#   pivot_longer(
-#     cols = starts_with("y_"),
-#     names_to = "y_direction",
-#     values_to = "y"
-#   )
-
+slice_to_circle <- bind_rows(slice_to_circle)
 
 all_egg_slices <- full_join(
   x = egg_slice,
   y = slice_to_circle,
   by = "x"
-) %>% 
+) %>%
   mutate(
     y = y * y_slice,
     z = y * z
-  ) %>% 
-  select(x,y,z)
+  ) %>%
+  select(x, y, z)
 
 # TODO https://stackoverflow.com/questions/67236291/how-to-rotate-vector-time-series
 
@@ -167,14 +158,13 @@ rgl::plot3d(
 )
 
 rgl::plot3d(
-  x = all_egg_slices$x, 
-  y = all_egg_slices$y, 
-  z = all_egg_slices$z, 
+  x = all_egg_slices$x,
+  y = all_egg_slices$y,
+  z = all_egg_slices$z,
   col = "#696969", # rainbow(1000)
   alpha = .5,
   axes = FALSE,
   box = FALSE
-  
 )
 
 #
