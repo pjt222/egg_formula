@@ -50,8 +50,8 @@ slice_to_circle <- lapply(seq_along(egg_slice$x), function(u) {
   tibble(
     theta_slice = seq.int(0, 360, 1),
     x = egg_slice[["x"]][u],
-    y_slice = round(sin(theta_slice), 3),
-    z = round(cos(theta_slice), 3)
+    y_slice = round(sin(theta_slice), 8),
+    z = round(cos(theta_slice), 8)
   )
   
 })
