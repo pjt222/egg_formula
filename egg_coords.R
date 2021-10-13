@@ -45,6 +45,36 @@ egg_slice <- data.frame(
     values_to = "y"
   )
 
+slice_to_circle <- lapply(seq_along(egg_slice$x), function(u) {
+  
+  tibble(
+    theta_slice = seq.int(0, 360, 1),
+    x = egg_slice[["x"]][u],
+    y_slice = round(sin(theta_slice), 3),
+    z = round(cos(theta_slice), 3)
+  )
+  
+})
+
+slice_to_circle <- bind_rows(slice_to_circle) 
+# %>%
+#   pivot_longer(
+#     cols = starts_with("y_"),
+#     names_to = "y_direction",
+#     values_to = "y"
+#   )
+
+
+all_egg_slices <- full_join(
+  x = egg_slice,
+  y = slice_to_circle,
+  by = "x"
+) %>% 
+  mutate(
+    y = y * y_slice
+  ) %>% 
+  select(x,y,z)
+
 # TODO https://stackoverflow.com/questions/67236291/how-to-rotate-vector-time-series
 
 rotx <- function(a # in radians, e.g. a = pi/4
@@ -56,6 +86,22 @@ rotx <- function(a # in radians, e.g. a = pi/4
       1, 0, 0,
       0, cos(a), -sin(a),
       0, sin(a), cos(a)
+    ),
+    nrow = 3,
+    ncol = 3,
+    byrow = TRUE
+  )
+}
+
+rotz <- function(a # in radians, e.g. a = pi/4
+) {
+  # https://www.mathworks.com/help/phased/ref/rotx.html
+  # Counterclockwise rotation around x-axis
+  matrix(
+    c(
+      cos(a), -sin(a), 0,
+      sin(a), cos(a), 0,
+      0, 0, 1
     ),
     nrow = 3,
     ncol = 3,
@@ -118,6 +164,18 @@ rgl::plot3d(
   z = egg_rotated$z, # 0,#sin(egg_slice$y*2*pi),
   col = "#696969" # rainbow(1000)
 )
+
+rgl::plot3d(
+  x = all_egg_slices$x, 
+  y = all_egg_slices$y, 
+  z = all_egg_slices$z, 
+  col = "#696969", # rainbow(1000)
+  alpha = .5,
+  axes = FALSE,
+  box = FALSE
+  
+)
+
 #
 # y2 <- function(x,...) {
 #   B/2*((L^2-4*x^2)/L)^.5*(
