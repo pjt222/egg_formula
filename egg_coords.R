@@ -173,9 +173,9 @@ rgl::plot3d(
   x = all_egg_slices$x,
   y = all_egg_slices$y,
   z = all_egg_slices$z,
-  col = "#696969", # rainbow(1000)
+  col = "#696969",
   alpha = .5,
-  axes = FALSE,
+  axes = TRUE,
   box = FALSE
 )
 
