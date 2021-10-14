@@ -165,8 +165,9 @@ rgl::plot3d(
   z = slice_to_circle$z,
   col = "#696969", # rainbow(1000)
   alpha = .5,
-  axes = FALSE,
-  box = FALSE
+  axes = TRUE,
+  box = FALSE#,
+  # add = TRUE
 )
 
 rgl::plot3d(
@@ -176,7 +177,8 @@ rgl::plot3d(
   col = "#696969",
   alpha = .5,
   axes = TRUE,
-  box = FALSE
+  box = FALSE,
+  add = TRUE
 )
 
 #
