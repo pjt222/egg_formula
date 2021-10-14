@@ -1,7 +1,7 @@
 #' @param L Eilänge
 #' @param w maximalen Breite
 #' @param B Abstand zwischen dem Bereich der maximalen Breite und der halben Länge des Eies
-#' @param DL4 Eidurchmesser (ein Viertel der Eilänge vom spitzen Ende entfernt)
+#' @param DL4 Eidurchmesser ein Viertel der Eilänge vom spitzen Ende entfernt
 #' @param seq01 Schrittweite der x-achse
 #' @param seq01 Schrittweite in in Grad in sclice_to_circle
 #' @param color Color passed to plot3d
@@ -104,6 +104,7 @@ plot_egg <- function(
   
   # plot ----
   rgl.clear()
+  bg3d("#696969")
   plot3d(
     x = all_egg_slices$x,
     y = all_egg_slices$y,
@@ -122,10 +123,10 @@ plot_egg <- function(
 plot_egg(
   L = 8, 
   w = 7,
-  B = 3.4, 
+  B = 3.5, 
   DL4 = 5.0,
-  seq01 = 0.01,
-  seq02 = 1,
+  seq01 = 0.008,
+  seq02 = 0.5,
   color = "black"
 )
 
