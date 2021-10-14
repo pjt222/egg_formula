@@ -36,8 +36,8 @@ res <- Term1(x) * Term2
 
 egg_slice <- data.frame(
   x = x,
-  y_p = res,
-  y_n = -res
+  y_p = res # ,
+  # y_n = -res
 ) %>%
   pivot_longer(
     cols = starts_with("y_"),
@@ -65,7 +65,9 @@ all_egg_slices <- full_join(
     y = y * y_slice,
     z = y * z
   ) %>%
-  select(x, y, z)
+  select(x, y, z) %>% 
+  distinct()
+
 
 # TODO https://stackoverflow.com/questions/67236291/how-to-rotate-vector-time-series
 
@@ -155,6 +157,16 @@ rgl::plot3d(
   y = egg_rotated$y, # egg_slice$y,
   z = egg_rotated$z, # 0,#sin(egg_slice$y*2*pi),
   col = "#696969" # rainbow(1000)
+)
+
+rgl::plot3d(
+  x = slice_to_circle$x,
+  y = slice_to_circle$y_slice,
+  z = slice_to_circle$z,
+  col = "#696969", # rainbow(1000)
+  alpha = .5,
+  axes = FALSE,
+  box = FALSE
 )
 
 rgl::plot3d(
