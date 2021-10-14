@@ -2,6 +2,11 @@
 library(tidyverse)
 library(rgl)
 
+# function -----
+plot_egg <- function() {
+  
+}
+
 # constants ----
 L <- 8 # Eilänge
 w <- 3.5 * 2 # maximalen Breite
