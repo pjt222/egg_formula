@@ -98,9 +98,10 @@ plot3d(
   z = all_egg_slices$z,
   col = "#696969",
   alpha = .5,
-  axes = TRUE,
+  axes = FALSE,
   box = FALSE,
   add = FALSE,
   axis.scales = FALSE,
-  xlim = c(-L + 1, L + 1), ylim = c(-L + 1, L + 1), zlim = c(-L + 1, L + 1)
+  xlim = c(-L + 1, L + 1), ylim = c(-L + 1, L + 1), zlim = c(-L + 1, L + 1),
+  xlab = "", ylab = "", zlab = ""
 )
