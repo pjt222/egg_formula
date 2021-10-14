@@ -66,9 +66,22 @@ all_egg_slices <- full_join(
   by = "x"
 ) %>%
   mutate(
-    y = y * y_slice,
-    z = y * z
+    y_one = y * y_slice,
+    z_one = y * z,
+    y_two = y * z,
+    z_two = y * y_slice
   ) %>%
+  select(-c(y_slice, y, z, y_direction)) %>% 
+  pivot_longer(
+    cols = starts_with("y_"),
+    names_to = "direction_y",
+    values_to = "y"
+  ) %>% 
+  pivot_longer(
+    cols = starts_with("z_"),
+    names_to = "direction_z",
+    values_to = "z"
+  ) %>% 
   select(x, y, z) %>% 
   distinct()
 
@@ -92,5 +105,5 @@ plot3d(
   alpha = .5,
   axes = TRUE,
   box = FALSE,
-  add = FALSE
+  add = TRUE
 )
