@@ -6,10 +6,10 @@
 #' @param seq01 Schrittweite in in Grad in sclice_to_circle
 #' @param color Color passed to plot3d
 plot_egg <- function(
-  L = 8, # Eilänge
-  w = 3.5 * 2, # 
-  B = 1.7 * 2, # 
-  DL4 = 3.3 * 2, # 
+  L = 8, 
+  w = 3.5 * 2,
+  B = 1.7 * 2, 
+  DL4 = 3.3 * 2,
   seq01 = 0.01,
   seq02 = 1,
   color = "#696969",
@@ -103,6 +103,7 @@ plot_egg <- function(
     )
   
   # plot ----
+  rgl.clear()
   plot3d(
     x = all_egg_slices$x,
     y = all_egg_slices$y,
@@ -118,6 +119,15 @@ plot_egg <- function(
   )
 }
 
+plot_egg(
+  L = 8, 
+  w = 7,
+  B = 3.4, 
+  DL4 = 6.0,
+  seq01 = 0.01,
+  seq02 = 1,
+  color = "black"
+)
 
 
 
