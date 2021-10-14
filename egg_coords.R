@@ -5,7 +5,7 @@ L <- 8 # Eilänge
 w <- 3.5 * 2 # maximalen Breite
 B <- 1.7 * 2 # Abstand zwischen dem Bereich der maximalen Breite und der halben Länge des Eies
 DL4 <- 3.3 * 2 # Eidurchmesser (ein Viertel der Eilänge vom spitzen Ende entfernt)
-x <- seq(-L / 2, L / 2, by = L * 0.05)
+x <- seq(-L / 2, L / 2, by = L * 0.01)
 
 Term1 <- function(x, ...) {
   # TODO mind + -
@@ -48,7 +48,7 @@ egg_slice <- data.frame(
 
 slice_to_circle <- lapply(seq_along(egg_slice$x), function(u) {
   tibble(
-    theta_slice = seq.int(0, 360, 15),
+    theta_slice = seq.int(0, 360, 1),
     x = egg_slice[["x"]][u],
     y_slice = round(sin(theta_slice), 8),
     z = round(cos(theta_slice), 8)
@@ -167,8 +167,8 @@ plot3d(
   col = "#696969", # rainbow(1000)
   alpha = .5,
   axes = TRUE,
-  box = FALSE#,
-  # add = TRUE
+  box = FALSE,
+  add = TRUE
 )
 
 plot3d(
@@ -179,7 +179,7 @@ plot3d(
   alpha = .5,
   axes = TRUE,
   box = FALSE,
-  add = TRUE
+  add = FALSE
 )
 
 #
