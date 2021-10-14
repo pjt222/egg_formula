@@ -83,27 +83,22 @@ all_egg_slices <- full_join(
     values_to = "z"
   ) %>% 
   select(x, y, z) %>% 
-  distinct()
+  distinct() %>% 
+  mutate(
+    yEQz = ifelse(y == z ,TRUE, FALSE)
+  ) %>% 
+  filter(
+    !(yEQz)
+  )
 
 # plot ----
-plot3d(
-  x = slice_to_circle$x,
-  y = slice_to_circle$y_slice,
-  z = slice_to_circle$z,
-  col = "#696969", # rainbow(1000)
-  alpha = .5,
-  axes = TRUE,
-  box = FALSE,
-  add = TRUE
-)
-
 plot3d(
   x = all_egg_slices$x,
   y = all_egg_slices$y,
   z = all_egg_slices$z,
   col = "#696969",
-  alpha = .5,
+  alpha = .4,
   axes = TRUE,
   box = FALSE,
-  add = TRUE
+  add = FALSE
 )
