@@ -114,7 +114,7 @@ plot_egg <- function(
     box = FALSE,
     add = FALSE,
     axis.scales = FALSE,
-    xlim = c(-L + 1, L + 1), ylim = c(-L + 1, L + 1), zlim = c(-L + 1, L + 1),
+    xlim = c(-L, L), ylim = c(-L, L), zlim = c(-L, L),
     xlab = "", ylab = "", zlab = ""
   )
 }
@@ -123,7 +123,7 @@ plot_egg(
   L = 8, 
   w = 7,
   B = 3.4, 
-  DL4 = 6.0,
+  DL4 = 5.0,
   seq01 = 0.01,
   seq02 = 1,
   color = "black"
