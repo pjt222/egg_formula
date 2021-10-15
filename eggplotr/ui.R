@@ -4,9 +4,7 @@ library(rgl)
 shinyUI(
   fluidPage(
     mainPanel(
-      rglwidgetOutput("egg"),
-      width = 10,
-      offset = 2
+      rglwidgetOutput("egg", width = "900px", height = "900px")
     )
   )
 )
