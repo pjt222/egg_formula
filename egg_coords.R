@@ -1,3 +1,6 @@
+#' Egg Shaped 3d Scatterplot
+#' 
+#' 
 #' @param L Eilänge
 #' @param w maximalen Breite
 #' @param B Abstand zwischen dem Bereich der maximalen Breite und der halben Länge des Eies
@@ -119,18 +122,3 @@ plot_egg <- function(
     xlab = "", ylab = "", zlab = ""
   )
 }
-
-plot_egg(
-  L = 8, 
-  w = 7,
-  B = 3.5, 
-  DL4 = 5.0,
-  seq01 = 0.008,
-  seq02 = 0.5,
-  color = "black"
-)
-
-
-
-
-
