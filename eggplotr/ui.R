@@ -1,5 +1,6 @@
 library(shiny)
 library(rgl)
+library(shinyWidgets)
 
 fluidPage(
   sidebarLayout(
@@ -15,5 +16,6 @@ fluidPage(
     mainPanel(
       rglwidgetOutput("egg", width = "900px", height = "900px")
     )
-  )
+  ),
+  setBackgroundColor("#696969")
 )
