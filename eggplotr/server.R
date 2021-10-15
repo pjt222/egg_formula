@@ -11,13 +11,13 @@ shinyServer(
   function(input, output) {
     output$egg <- renderRglwidget({
       plot_egg(
-        L = 8,
-        w = 7,
-        B = 3.5,
-        DL4 = 5.0,
-        seq01 = 0.05,
-        seq02 = 2,
-        color = "black"
+        L = input$L,
+        w = input$w,
+        B = input$B,
+        DL4 = input$DL4,
+        seq01 = input$seq01,
+        seq02 = input$seq02,
+        color = input$color
       )
       rglwidget()
     })
