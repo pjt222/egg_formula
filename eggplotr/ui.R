@@ -7,7 +7,7 @@ fluidPage(
   titlePanel("eggplotr"),
   sidebarLayout(
     sidebarPanel(
-      chooseSliderSkin(skin = "Flat", color = "orange"),
+      chooseSliderSkin(skin = "Shiny", color = "#696969 !important; border-color: #000000"),
       # setSliderColor(rep("#000000",6), c(1:6)),
       sliderInput("L", "Length", 1, 20, 8, .5),
       sliderInput("w", "w", 1, 20, 7, .5),
