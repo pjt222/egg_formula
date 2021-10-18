@@ -1,5 +1,6 @@
 options(rgl.useNULL = TRUE)
 library(shiny)
+library(colourpicker)
 library(rgl)
 library(shinyWidgets)
 
@@ -15,7 +16,7 @@ fluidPage(
       sliderInput("DL4", "DL4", 1, 10, 5, .5),
       sliderInput("seq01", "seq01", 0.01, 0.2, 0.05, .01),
       sliderInput("seq02", "seq02", 1, 15, 2, 1),
-      textInput("color", "color", "orange"),
+      colourInput("color", "color", "orange"),
       tags$style("
                  .well {
                  background-color:#696969;
@@ -23,8 +24,6 @@ fluidPage(
                  border-color:#696969;
                  border-width:0px;
                  }
-
-                 .row {border-style:none;}
                  ")
     ),
     mainPanel(
