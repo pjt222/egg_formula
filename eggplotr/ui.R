@@ -16,11 +16,16 @@ fluidPage(
       sliderInput("seq01", "seq01", 0.01, 0.2, 0.05, .01),
       sliderInput("seq02", "seq02", 1, 15, 2, 1),
       textInput("color", "color", "orange"),
-      tags$style(".well {
+      tags$style("
+                 .well {
                  background-color:#696969;
+                 border-style:none;
                  border-color:#696969;
                  border-width:0px;
-                 }")
+                 }
+
+                 .row {border-style:none;}
+                 ")
     ),
     mainPanel(
       rglwidgetOutput("egg", width = "900px", height = "900px")
