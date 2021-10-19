@@ -16,6 +16,7 @@ function(input, output) {
       seq02 = input$seq02,
       color = input$color
     )
+    rgl.viewpoint(zoom = .22)
     rglwidget()
   })
 }

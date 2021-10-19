@@ -24,6 +24,21 @@ fluidPage(
               border-width:0px;
               box-shadow: none;
             }
+          .colourpicker-input {
+              *background-color:transparent !important;
+              border-style: none !important;
+          *border-width: 0px !important;
+          }
+          .colourpicker-input-container {
+          background-color: transparent !important;
+          border-style: none !important;
+          }
+          .colourpicker-panel {
+          background-color: #696969 !important;
+          border-style: none !important;
+          *border-width: 0px !important;
+          }
+            
           ")
       ),
       sliderInput("L", "Length", 1, 20, 8, .5, ticks = FALSE, animate = TRUE),
