@@ -14,7 +14,7 @@ fluidPage(
             {
               background: #696969 !important;
               border-color: #000000 !important;
-              border-width: 2px !important;
+              border-width: 1px !important;
             }
           .well
             {
@@ -22,6 +22,7 @@ fluidPage(
               border-style:none;
               border-color:#696969;
               border-width:0px;
+              box-shadow: none;
             }
           ")
       ),
