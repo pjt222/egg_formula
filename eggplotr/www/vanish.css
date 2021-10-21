@@ -1,4 +1,6 @@
-body {background-color: #696969;}
+body {
+    background-color: #696969;
+}
 
 .irs-bar-edge,
 .irs-bar,
@@ -8,6 +10,16 @@ body {background-color: #696969;}
     background: #696969 !important;
     border-color: #000000 !important;
     border-width: 1px !important;
+    border-radius: 8px !important;
+}
+
+.irs--shiny .irs-line {
+    top: 25px;
+    height: 8px;
+    background: linear-gradient(to right, #696969, #000000) !important;
+    background-color: #ededed;
+    border: 0px solid #cccccc !important;
+    border-radius: 8px;
 }
 
 .well {
@@ -19,7 +31,7 @@ body {background-color: #696969;}
 }
 
 .colourpicker-input {
-    *background-color: transparent !important;
+    *background-color: red !important;
     border-style: none !important;
     *border-width: 0px !important;
 }
@@ -33,4 +45,19 @@ body {background-color: #696969;}
     background-color: #696969 !important;
     border-style: none !important;
     *border-width: 0px !important;
+}
+
+.irs--shiny .irs-handle.state_hover,
+.irs--shiny .irs-handle:hover {
+    background: #000000 !important;
+}
+
+.irs--shiny .irs-handle {
+    top: 17px;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #000000;
+    background-color: #696969 !important;
+    box-shadow: 0px 0px 8px 4px rgba(255, 255, 255, 0.3);
+    border-radius: 22px;
 }
