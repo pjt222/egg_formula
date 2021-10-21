@@ -5,42 +5,10 @@ library(rgl)
 library(shinyWidgets)
 
 fluidPage(
+  includeCSS("www/vanish.css"),
   titlePanel("eggplotr"),
   sidebarLayout(
     sidebarPanel(
-      tags$head(
-        tags$style("
-          .irs-bar-edge, .irs-bar, .irs-single, .irs-from, .irs-to
-            {
-              background: #696969 !important;
-              border-color: #000000 !important;
-              border-width: 1px !important;
-            }
-          .well
-            {
-              background-color:#696969;
-              border-style:none;
-              border-color:#696969;
-              border-width:0px;
-              box-shadow: none;
-            }
-          .colourpicker-input {
-              *background-color:transparent !important;
-              border-style: none !important;
-          *border-width: 0px !important;
-          }
-          .colourpicker-input-container {
-          background-color: transparent !important;
-          border-style: none !important;
-          }
-          .colourpicker-panel {
-          background-color: #696969 !important;
-          border-style: none !important;
-          *border-width: 0px !important;
-          }
-            
-          ")
-      ),
       sliderInput("L", "Length", 1, 20, 8, .5, ticks = FALSE, animate = TRUE),
       sliderInput("w", "w", 1, 20, 7, .5, ticks = FALSE, animate = TRUE),
       sliderInput("B", "B", 1, 10, 3.5, .5, ticks = FALSE, animate = TRUE),
@@ -52,6 +20,5 @@ fluidPage(
     mainPanel(
       rglwidgetOutput("egg", width = "900px", height = "900px")
     )
-  ),
-  setBackgroundColor("#696969")
+  )
 )

@@ -1,0 +1,36 @@
+body {background-color: #696969;}
+
+.irs-bar-edge,
+.irs-bar,
+.irs-single,
+.irs-from,
+.irs-to {
+    background: #696969 !important;
+    border-color: #000000 !important;
+    border-width: 1px !important;
+}
+
+.well {
+    background-color: #696969;
+    border-style: none;
+    border-color: #696969;
+    border-width: 0px;
+    box-shadow: none;
+}
+
+.colourpicker-input {
+    *background-color: transparent !important;
+    border-style: none !important;
+    *border-width: 0px !important;
+}
+
+.colourpicker-input-container {
+    background-color: transparent !important;
+    border-style: none !important;
+}
+
+.colourpicker-panel {
+    background-color: #696969 !important;
+    border-style: none !important;
+    *border-width: 0px !important;
+}
