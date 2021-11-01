@@ -3,7 +3,7 @@ library(shiny)
 library(rgl)
 library(tidyverse)
 
-source("../egg_coords.R")
+source("R/egg_coords.R")
 
 function(input, output) {
   output$egg <- renderRglwidget({
@@ -16,7 +16,7 @@ function(input, output) {
       seq02 = input$seq02,
       color = input$color
     )
-    rgl.viewpoint(zoom = .22)
+    rgl.viewpoint(zoom = .5)
     rglwidget()
   })
 }
