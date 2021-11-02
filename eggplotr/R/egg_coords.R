@@ -139,6 +139,7 @@ plot_egg <- function(L = 8,
         axis = FALSE,
         grid = FALSE,
         # use.orbitcontrols=TRUE,
+        xlim = c(-L, L), ylim = c(-L, L), zlim = c(-L, L),
         pch = "."
       )
     })
