@@ -7,8 +7,6 @@ library(threejs)
 source("R/egg_coords.R")
 
 function(input, output) {
-  # out <<- reactive()
-
   output$egg_rgl <- {
     renderRglwidget({
       plot_egg(
@@ -40,4 +38,8 @@ function(input, output) {
       )
     })
   }
+  
+  observeEvent(input$e, {
+    updateTabsetPanel(inputId = "engine_tabs", selected = input$e)
+  })
 }
