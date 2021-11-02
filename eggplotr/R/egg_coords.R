@@ -1,6 +1,6 @@
 #' Egg Shaped 3d Scatterplot
-#' 
-#' 
+#'
+#'
 #' @param L Eilänge
 #' @param w maximalen Breite
 #' @param B Abstand zwischen dem Bereich der maximalen Breite und der halben Länge des Eies
@@ -8,19 +8,19 @@
 #' @param seq01 Schrittweite der x-achse
 #' @param seq01 Schrittweite in in Grad in sclice_to_circle
 #' @param color Color passed to plot3d
-plot_egg <- function(
-  L = 8, 
-  w = 3.5 * 2,
-  B = 1.7 * 2, 
-  DL4 = 3.3 * 2,
-  seq01 = 0.01,
-  seq02 = 1,
-  color = "#696969",
-  ...
-) {
+plot_egg <- function(L = 8,
+                     w = 3.5 * 2,
+                     B = 1.7 * 2,
+                     DL4 = 3.3 * 2,
+                     seq01 = 0.01,
+                     seq02 = 1,
+                     color = "#696969",
+                     engine = "rgl",
+                     ...) {
   # libraries ----
   library(tidyverse)
   library(rgl)
+  library(threejs)
   # constants ----
   x <- seq(-L / 2, L / 2, by = L * seq01)
   # functions -----
@@ -28,7 +28,7 @@ plot_egg <- function(
     # TODO mind + -
     B / 2 * ((L^2 - 4 * x^2) / (L^2 + 8 * w * x + 4 * w^2))^.5
   }
-  
+
   Term21 <- function(x, ...) {
     (
       (5.5 * L^2 + 11 * L * w + 4 * w^2)^.5 * (3^.5 * B * L - 2 * DL4 * (L^2 + 2 * w * L + 4 * w^2)^.5)
@@ -47,12 +47,12 @@ plot_egg <- function(
         )
     )^.5
   }
-  
+
   # create data ----
   Term2 <- 1 - Term21(x) * Term22(x)
-  
+
   res <- Term1(x) * Term2
-  
+
   egg_slice <- data.frame(
     x = x,
     y_p = res
@@ -62,7 +62,7 @@ plot_egg <- function(
       names_to = "y_direction",
       values_to = "y"
     )
-  
+
   slice_to_circle <- lapply(seq_along(egg_slice$x), function(u) {
     tibble(
       theta_slice = seq.int(0, 360, seq02),
@@ -71,9 +71,9 @@ plot_egg <- function(
       z = round(cos(theta_slice), 8)
     )
   })
-  
+
   slice_to_circle <- bind_rows(slice_to_circle)
-  
+
   all_egg_slices <- full_join(
     x = egg_slice,
     y = slice_to_circle,
@@ -104,21 +104,43 @@ plot_egg <- function(
     filter(
       !(yEQz)
     )
-  
+
   # plot ----
-  rgl.clear()
-  bg3d("#696969")
-  plot3d(
-    x = all_egg_slices$x,
-    y = all_egg_slices$y,
-    z = all_egg_slices$z,
-    col = color,
-    alpha = .1,
-    axes = FALSE,
-    box = FALSE,
-    add = FALSE,
-    axis.scales = FALSE,
-    xlim = c(-L, L), ylim = c(-L, L), zlim = c(-L, L),
-    xlab = "", ylab = "", zlab = ""
-  )
+  if (engine == "rgl") {
+    return({
+      rgl.clear()
+      bg3d("#696969")
+      plot3d(
+        x = all_egg_slices$x,
+        y = all_egg_slices$y,
+        z = all_egg_slices$z,
+        col = color,
+        alpha = .1,
+        axes = FALSE,
+        box = FALSE,
+        add = FALSE,
+        axis.scales = FALSE,
+        xlim = c(-L, L), ylim = c(-L, L), zlim = c(-L, L),
+        xlab = "", ylab = "", zlab = ""
+      )
+    })
+  }
+  if (engine == "threejs") {
+    return({
+      scatterplot3js(
+        x = all_egg_slices$x,
+        y = all_egg_slices$y,
+        z = all_egg_slices$z,
+        size = 0.1,
+        color = color,
+        bg = "#696969",
+        # stroke = "red",
+        # renderer = "canvas",
+        axis = FALSE,
+        grid = FALSE,
+        # use.orbitcontrols=TRUE,
+        pch = "."
+      )
+    })
+  }
 }
