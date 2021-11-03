@@ -5,7 +5,7 @@ account: pjt222
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5015199
-bundleId: 5203192
+bundleId: 5206709
 url: https://pjt222.shinyapps.io/eggplotr/
-when: 1635864694.09467
-lastSyncTime: 1635864694.09467
+when: 1635929421.71303
+lastSyncTime: 1635929421.71303
