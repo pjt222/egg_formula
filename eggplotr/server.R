@@ -1,4 +1,6 @@
 server <- function(input, output) {
+  waiter_hide()
+  
   output$egg_rgl <- {
     renderRglwidget({
       plot_egg(

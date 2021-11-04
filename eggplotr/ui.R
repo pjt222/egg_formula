@@ -1,4 +1,6 @@
 ui <- fluidPage(
+  useWaiter(),
+  waiterShowOnLoad(spin_pulsar(), color = "#696969"),
   includeCSS("www/vanish.css"),
   titlePanel("eggplotr"),
   sidebarLayout(
@@ -10,7 +12,7 @@ ui <- fluidPage(
       sliderInput("DL4", "DL4", 1, 10, 5, .5, ticks = FALSE), # animate = TRUE),
       sliderInput("seq01", "seq01", 0.01, 0.2, 0.05, .01, ticks = FALSE), # animate = TRUE),
       sliderInput("seq02", "seq02", 1, 15, 2, 1, ticks = FALSE), # animate = TRUE),
-      colourInput("color", "color", "orange")
+      colourInput("color", "color", "#e67e22")
     ),
     mainPanel(
       tabsetPanel(
