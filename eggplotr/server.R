@@ -1,12 +1,4 @@
-options(rgl.useNULL = TRUE)
-library(shiny)
-library(rgl)
-library(tidyverse)
-library(threejs)
-
-source("R/egg_coords.R")
-
-function(input, output) {
+server <- function(input, output) {
   output$egg_rgl <- {
     renderRglwidget({
       plot_egg(

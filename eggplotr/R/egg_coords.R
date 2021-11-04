@@ -17,10 +17,6 @@ plot_egg <- function(L = 8,
                      color = "#696969",
                      engine = "rgl",
                      ...) {
-  # libraries ----
-  library(tidyverse)
-  library(rgl)
-  library(threejs)
   # constants ----
   x <- seq(-L / 2, L / 2, by = L * seq01)
   # functions -----
