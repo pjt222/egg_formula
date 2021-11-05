@@ -1,6 +1,12 @@
 server <- function(input, output) {
   waiter_hide()
-  
+
+  w <- Waiter$new(
+    id = c("egg_rgl", "egg_threejs"),
+    html = spin_pulsar(),
+    color = "#696969"
+  )
+
   output$egg_rgl <- {
     renderRglwidget({
       plot_egg(
@@ -11,7 +17,7 @@ server <- function(input, output) {
         seq01 = input$seq01,
         seq02 = input$seq02,
         color = input$color,
-        engine = "rgl"#input$e
+        engine = "rgl" # input$e
       )
       rgl.viewpoint(zoom = .5)
       rglwidget()
@@ -28,12 +34,14 @@ server <- function(input, output) {
         seq01 = input$seq01,
         seq02 = input$seq02,
         color = input$color,
-        engine = "threejs"#input$e
+        engine = "threejs" # input$e
       )
     })
   }
-  
+
   observeEvent(input$e, {
+    w$show()
     updateTabsetPanel(inputId = "engine_tabs", selected = input$e)
+    w$hide()
   })
 }
