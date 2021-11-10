@@ -14,7 +14,7 @@ plot_egg <- function(L = 8,
                      DL4 = 3.3 * 2,
                      seq01 = 0.01,
                      seq02 = 1,
-                     color = "#696969",
+                     color = "#e67e22",
                      engine = "rgl",
                      ...) {
   # constants ----

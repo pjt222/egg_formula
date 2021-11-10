@@ -1,10 +1,18 @@
-server <- function(input, output) {
+server <- function(input, output, session) {
   waiter_hide()
 
   w <- Waiter$new(
     id = c("egg_rgl", "egg_threejs"),
     html = spin_pulsar(),
     color = "#696969"
+  )
+  
+  observeEvent(
+    c(input$L, input$w, input$B, input$DL4, input$seq01, input$seq02, input$color),
+    {
+     shinyGetPar3d("userMatrix", session)
+    },
+    ignoreInit = TRUE
   )
 
   output$egg_rgl <- {
@@ -20,6 +28,7 @@ server <- function(input, output) {
         engine = "rgl" # input$e
       )
       rgl.viewpoint(zoom = .5)
+      par3d(userMatrix = input$par3d$userMatrix)
       rglwidget()
     })
   }
