@@ -16,6 +16,7 @@ plot_egg <- function(L = 8,
                      seq02 = 1,
                      color = "#e67e22",
                      engine = "rgl",
+                     # userMatrix,
                      ...) {
   # constants ----
   x <- seq(-L / 2, L / 2, by = L * seq01)
@@ -118,6 +119,7 @@ plot_egg <- function(L = 8,
         axis.scales = FALSE,
         xlim = c(-L, L), ylim = c(-L, L), zlim = c(-L, L),
         xlab = "", ylab = "", zlab = ""
+        # ,userMatrix = userMatrix
       )
     })
   }
