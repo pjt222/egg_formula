@@ -5,7 +5,7 @@ ui <- fluidPage(
   titlePanel("eggplotr"),
   sidebarLayout(
     sidebarPanel(
-      selectInput("e", "engine", c("rgl", "threejs")),
+      selectInput("e", "engine", c("rgl", "rgl_persp", "threejs")),
       sliderInput("L", "Length", 1, 20, 8, .5, ticks = FALSE), # animate = TRUE),
       sliderInput("w", "w", 1, 20, 7, .5, ticks = FALSE), # animate = TRUE),
       sliderInput("B", "B", 1, 10, 3.5, .5, ticks = FALSE), # animate = TRUE),
@@ -19,6 +19,7 @@ ui <- fluidPage(
         id = "engine_tabs",
         type = "hidden",
         tabPanel("rgl", rglwidgetOutput("egg_rgl", width = "900px", height = "900px")),
+        tabPanel("rgl_persp", rglwidgetOutput("egg_rgl_persp", width = "900px", height = "900px")),
         tabPanel("threejs", scatterplotThreeOutput("egg_threejs", width = "900px", height = "900px"))
       )
     )

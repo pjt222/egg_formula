@@ -121,6 +121,27 @@ plot_egg <- function(L = 8,
       )
     })
   }
+  if (engine == "rgl_persp") {
+    return({
+      rgl.clear()
+      bg3d("#696969")
+      shade3d(
+        turn3d(
+          x = x,
+          y = res,
+          n = 360 / seq02,
+          smooth = T,
+          material = material3d(
+            color = color,
+            alpha = 1,
+            lit = TRUE
+          )
+        ),
+        override = FALSE,
+        xlim = c(-L, L), ylim = c(-L, L), zlim = c(-L, L)
+      )
+    })
+  }
   if (engine == "threejs") {
     return({
       scatterplot3js(
