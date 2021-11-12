@@ -26,7 +26,6 @@ server <- function(input, output, session) {
         seq02 = input$seq02,
         color = input$color,
         engine = "rgl" # input$e
-        # , userMatrix = input$par3d$userMatrix
       )
       rgl.viewpoint(zoom = .5)
       par3d(userMatrix = input$par3d$userMatrix)
