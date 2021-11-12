@@ -16,7 +16,6 @@ plot_egg <- function(L = 8,
                      seq02 = 1,
                      color = "#e67e22",
                      engine = "rgl",
-                     # userMatrix,
                      ...) {
   # constants ----
   x <- seq(-L / 2, L / 2, by = L * seq01)
@@ -119,7 +118,27 @@ plot_egg <- function(L = 8,
         axis.scales = FALSE,
         xlim = c(-L, L), ylim = c(-L, L), zlim = c(-L, L),
         xlab = "", ylab = "", zlab = ""
-        # ,userMatrix = userMatrix
+      )
+    })
+  }
+  if (engine == "rgl_persp") {
+    return({
+      rgl.clear()
+      bg3d("#696969")
+      shade3d(
+        turn3d(
+          x = x,
+          y = res,
+          n = 360 / seq02,
+          smooth = T,
+          material = material3d(
+            color = color,
+            alpha = 1,
+            lit = TRUE
+          )
+        ),
+        override = FALSE,
+        xlim = c(-L, L), ylim = c(-L, L), zlim = c(-L, L)
       )
     })
   }

@@ -26,9 +26,26 @@ server <- function(input, output, session) {
         seq02 = input$seq02,
         color = input$color,
         engine = "rgl" # input$e
-        # , userMatrix = input$par3d$userMatrix
       )
       rgl.viewpoint(zoom = .5)
+      par3d(userMatrix = input$par3d$userMatrix)
+      rglwidget()
+    })
+  }
+
+  output$egg_rgl_persp <- {
+    renderRglwidget({
+      plot_egg(
+        L = input$L,
+        w = input$w,
+        B = input$B,
+        DL4 = input$DL4,
+        seq01 = input$seq01,
+        seq02 = input$seq02,
+        color = input$color,
+        engine = "rgl_persp" # input$e
+      )
+      rgl.viewpoint(zoom = 1)
       par3d(userMatrix = input$par3d$userMatrix)
       rglwidget()
     })
