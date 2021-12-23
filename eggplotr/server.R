@@ -2,7 +2,7 @@ server <- function(input, output, session) {
   waiter_hide()
 
   w <- Waiter$new(
-    id = c("egg_rgl", "egg_threejs"),
+    id = c("egg_brain", "egg_rgl", "egg_threejs"),
     html = spin_pulsar(),
     color = "#696969"
   )
@@ -14,6 +14,12 @@ server <- function(input, output, session) {
     },
     ignoreInit = TRUE
   )
+  
+  output$egg_brain <- {
+    renderText({
+      c("biological reinforced artificial intelligence network")
+      })
+  }
 
   output$egg_rgl <- {
     renderRglwidget({
