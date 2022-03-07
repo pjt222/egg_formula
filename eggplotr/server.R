@@ -6,19 +6,26 @@ server <- function(input, output, session) {
     html = spin_pulsar(),
     color = "#696969"
   )
-  
+
   observeEvent(
     c(input$L, input$w, input$B, input$DL4, input$seq01, input$seq02, input$color),
     {
-     shinyGetPar3d("userMatrix", session)
+      shinyGetPar3d("userMatrix", session)
     },
     ignoreInit = TRUE
   )
-  
+
   output$egg_brain <- {
-    renderText({
-      HTML("<u>biological reinforced artificial intelligence network</u>")
-      })
+    renderUI({
+      # c(
+      withMathJax(HTML("<p style='color:white;'>
+           <u>b</u>iological <u>r</u>einforced <u>a</u>rtificial <u>i</u>ntelligence <u>n</u>etwork</u>
+           </p><br>
+           
+          Some math here $$\\alpha+\\beta$$"))
+        
+        # )
+    })
   }
 
   output$egg_rgl <- {
