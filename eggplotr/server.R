@@ -81,4 +81,10 @@ server <- function(input, output, session) {
     updateTabsetPanel(session, inputId = "engine_tabs", selected = input$e)
     w$hide()
   })
+  
+  observeEvent(input$e, {
+    if (input$e=="b.r.a.i.n.") {
+      rgl.clear()      
+    }
+  })
 }
