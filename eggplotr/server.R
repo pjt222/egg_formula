@@ -16,7 +16,7 @@ server <- function(input, output, session) {
   )
 
   output$egg_brain <- {
-    renderUI({
+    renderPrint({
       withMathJax(
         HTML(
           engine_definition_brain
@@ -78,7 +78,7 @@ server <- function(input, output, session) {
 
   observeEvent(input$e, {
     w$show()
-    updateTabsetPanel(inputId = "engine_tabs", selected = input$e)
+    updateTabsetPanel(session, inputId = "engine_tabs", selected = input$e)
     w$hide()
   })
 }
