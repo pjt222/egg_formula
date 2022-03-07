@@ -17,14 +17,11 @@ server <- function(input, output, session) {
 
   output$egg_brain <- {
     renderUI({
-      # c(
-      withMathJax(HTML("<p style='color:white;'>
-           <u>b</u>iological <u>r</u>einforced <u>a</u>rtificial <u>i</u>ntelligence <u>n</u>etwork</u>
-           </p><br>
-           
-          Some math here $$\\alpha+\\beta$$"))
-        
-        # )
+      withMathJax(
+        HTML(
+          engine_definition_brain
+        )
+      )
     })
   }
 
