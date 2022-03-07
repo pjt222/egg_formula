@@ -6,19 +6,23 @@ server <- function(input, output, session) {
     html = spin_pulsar(),
     color = "#696969"
   )
-  
+
   observeEvent(
     c(input$L, input$w, input$B, input$DL4, input$seq01, input$seq02, input$color),
     {
-     shinyGetPar3d("userMatrix", session)
+      shinyGetPar3d("userMatrix", session)
     },
     ignoreInit = TRUE
   )
-  
+
   output$egg_brain <- {
-    renderText({
-      c("biological reinforced artificial intelligence network")
-      })
+    renderPrint({
+      withMathJax(
+        HTML(
+          engine_definition_brain
+        )
+      )
+    })
   }
 
   output$egg_rgl <- {
@@ -74,7 +78,13 @@ server <- function(input, output, session) {
 
   observeEvent(input$e, {
     w$show()
-    updateTabsetPanel(inputId = "engine_tabs", selected = input$e)
+    updateTabsetPanel(session, inputId = "engine_tabs", selected = input$e)
     w$hide()
+  })
+  
+  observeEvent(input$e, {
+    if (input$e=="b.r.a.i.n.") {
+      rgl.clear()      
+    }
   })
 }
