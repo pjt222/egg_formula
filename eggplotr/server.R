@@ -17,7 +17,7 @@ server <- function(input, output, session) {
   
   output$egg_brain <- {
     renderText({
-      c("biological reinforced artificial intelligence network")
+      HTML("<u>biological reinforced artificial intelligence network</u>")
       })
   }
 

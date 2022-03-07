@@ -18,7 +18,7 @@ ui <- fluidPage(
       tabsetPanel(
         id = "engine_tabs",
         type = "hidden",
-        tabPanel("b.r.a.i.n", textOutput("egg_brain")),
+        tabPanel("b.r.a.i.n", htmlOutput("egg_brain")),
         tabPanel("rgl", rglwidgetOutput("egg_rgl", width = "900px", height = "900px")),
         tabPanel("rgl_persp", rglwidgetOutput("egg_rgl_persp", width = "900px", height = "900px")),
         tabPanel("threejs", scatterplotThreeOutput("egg_threejs", width = "900px", height = "900px"))
