@@ -10,10 +10,11 @@ engine_definition_brain <<- paste0(
            "y=\\pm\\frac{B}{2}\\sqrt{\\frac{L^2-4x^2}{L^2+8wx+4w^2}}\\times\\left(1-\\frac{\\sqrt{5.5L^2+11Lw+4w^2}\\times\\left(\\sqrt{3}BL-2D_{\\frac{L}{4}}\\sqrt{L^2+2wL+4w^2}\\right)}{\\sqrt{3}BL\\left(\\sqrt{5.5L^2+11Lw+4w^2}-2\\sqrt{L^2+2wL+4w^2}\\right)}\\times\\left(1-\\sqrt{\\frac{L(L^2+8wx+4w^2)}{2(L-2w)x^2+(L^2+8Lw-4w^2)x+2Lw^2+L^2w+L^3}}\\right)\\right)",
            "$$"),
     "
+    <p style='color: black;'>This formula</p>
     <h2 style='color: black;'>engines</h2>
     <p style='color: black;'><strong></strong>There are currently four engines implemented to choose from.</p>
     <h3 style='color: black;'>b.r.a.i.n.</h3>
-    <p style='color: black;'>The first ist the the <em>b.r.a.i.n.</em> engine (<strong>b</strong>iological <strong>r</strong>einforced <strong>a</strong>rtificial <strong>i</strong>ntelligence <strong>n</strong>etwork) wich is owned by every human, but used by less. To use this engine in conjuction with eggplotr just set <em>savant_mode=true&nbsp;</em>and use the following formula to visualize the result with your inner eye.</p>
+    <p style='color: black;'>The first ist the the <em>b.r.a.i.n.</em> engine (<strong>b</strong>iological <strong>r</strong>einforced <strong>a</strong>rtificial <strong>i</strong>ntelligence <strong>n</strong>etwork) wich is owned by every human, but used by less. To use this engine in conjuction with eggplotr just set <em>savant_mode=true&nbsp;</em>and use the preceding formula and explanation to visualize the result with your inner eye.</p>
     <h3 style='color: black;'>rgl and rgl_persp</h3>
     <p style='color: black;'>The second ('rgl') and third ('rgl_persp') both are based on the R-package <a href='https://dmurdoch.github.io/rgl/' style='color: black;'><em>rgl</em></a> and use the functions <em>plot3d</em> to create a scatterplot or the functions <em>shade3d</em>, <em>turn3d</em> an <em>material3d</em> to create an surface plot.</p>
     <h3 style='color: black;'>threejs</h3>
