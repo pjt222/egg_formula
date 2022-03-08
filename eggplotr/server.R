@@ -16,7 +16,7 @@ server <- function(input, output, session) {
   )
 
   output$egg_brain <- {
-    renderPrint({
+    renderUI({
       withMathJax(
         HTML(
           engine_definition_brain
