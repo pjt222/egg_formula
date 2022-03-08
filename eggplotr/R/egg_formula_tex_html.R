@@ -1,4 +1,4 @@
-egg_formula_tex_html <- katex::katex_html(
+egg_formula_tex_html <<- katex::katex_html(
   "
     y = \\pm \\frac{B}{2}\\sqrt{\\frac{L^2-4x^2}{L^2+8wx+4w^2}}\\times
     \\left(1-\\frac{\\sqrt{5.5L^2+11Lw+4w^2}\\times\\left(\\sqrt{3}BL-2D_{\\frac{L}{4}}\\sqrt{L^2+2wL+4w^2}\\right)}
