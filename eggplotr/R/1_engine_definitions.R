@@ -6,8 +6,8 @@ engine_definition_brain <<- paste0(
     <h2 style='color: black;'>egg-formula</h2>
     ",
     # formula
-    # katex::katex_html(katex::example_math()),
-    "$$\\alpha^2-\\beta$$",
+    paste0("$$",katex::example_math(),"$$"),
+    # "$$\\alpha^2-\\beta$$",
     "
     <h2 style='color: black;'>engines</h2>
     <p style='color: black;'><strong></strong>There are currently four engines implemented to choose from.</p>
