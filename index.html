@@ -122,6 +122,16 @@
       <input type="color" id="egg-color" value="#e67e22">
     </div>
 
+    <div class="slider-group">
+      <label class="slider-label">
+        <span title="Specular highlight spread: 0 = mirror, 1 = fully diffuse">Roughness</span>
+        <span class="slider-value" id="val-roughness">0.4</span>
+      </label>
+      <input type="range" class="param-slider" data-param="roughness"
+             min="0" max="1" value="0.4" step="0.05"
+             aria-label="Surface roughness: 0 is mirror-like, 1 is fully diffuse">
+    </div>
+
     <span class="control-section-title">Lighting</span>
 
     <div class="slider-group">

@@ -89,12 +89,13 @@ export function getIridescentTexture() {
  * @param {THREE.Texture} thicknessMap - Noise texture for spatial variation
  * @param {object} [options]
  * @param {boolean} [options.wireframe=false]
+ * @param {number}  [options.roughness=0.15]
  * @returns {THREE.MeshPhysicalMaterial}
  */
 export function createIridescentMaterial(thicknessMap, options = {}) {
   return new THREE.MeshPhysicalMaterial({
     color: 0xf8f0e8,
-    roughness: 0.15,
+    roughness: options.roughness ?? 0.15,
     metalness: 0.2,
     clearcoat: 0.8,
     clearcoatRoughness: 0.1,

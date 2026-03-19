@@ -15,7 +15,7 @@ import { DEFAULTS } from './egg-formula.js';
 
 // ── State ───────────────────────────────────────────────────────────
 let currentMode = 'surface';
-let params = { ...DEFAULTS, palette: 'solid', inverted: false };
+let params = { ...DEFAULTS, palette: 'solid', inverted: false, roughness: 0.4 };
 let debounceTimer = null;
 
 // ── DOM References ──────────────────────────────────────────────────

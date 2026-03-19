@@ -41,17 +41,19 @@ export function renderEgg(mode, params, elements) {
   const usePalette = !isIridescent && palette != null && palette !== 'iridescent';
   const color = new THREE.Color(params.color);
 
+  const roughness = params.roughness ?? 0.4;
+
   if (mode === 'surface') {
     const geometry = createEggSurface(params);
     if (isIridescent) {
-      const material = createIridescentMaterial(getIridescentTexture());
+      const material = createIridescentMaterial(getIridescentTexture(), { roughness });
       addObject(new THREE.Mesh(geometry, material));
     } else {
       if (usePalette) applyVertexColors(geometry, palette, params.inverted);
       const material = new THREE.MeshStandardMaterial({
         color: usePalette ? 0xffffff : color,
         vertexColors: usePalette,
-        roughness: 0.4,
+        roughness,
         metalness: 0.1,
         side: THREE.DoubleSide,
       });
@@ -62,7 +64,7 @@ export function renderEgg(mode, params, elements) {
   if (mode === 'wireframe') {
     const geometry = createEggSurface(params);
     if (isIridescent) {
-      const material = createIridescentMaterial(getIridescentTexture(), { wireframe: true });
+      const material = createIridescentMaterial(getIridescentTexture(), { wireframe: true, roughness });
       addObject(new THREE.Mesh(geometry, material));
     } else {
       if (usePalette) applyVertexColors(geometry, palette, params.inverted);
