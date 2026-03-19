@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eggplotr</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <!-- KaTeX (for formula display in info mode) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <span class="header-title">eggplotr</span>
+    <div class="header-controls">
+      <div class="mode-buttons" role="tablist" aria-label="Rendering mode">
+        <button role="tab" data-mode="surface" class="active" aria-selected="true">Surface</button>
+        <button role="tab" data-mode="wireframe" aria-selected="false">Wireframe</button>
+        <button role="tab" data-mode="points" aria-selected="false">Points</button>
+        <button role="tab" data-mode="info" aria-selected="false">Info</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Panel Toggle -->
+  <button class="panel-toggle" id="panel-toggle" aria-expanded="true" aria-controls="control-panel">&#9664;</button>
+
+  <!-- Control Panel -->
+  <aside class="control-panel" id="control-panel" aria-label="Egg parameters">
+    <span class="control-section-title">Parameters</span>
+
+    <div class="slider-group">
+      <label class="slider-label">
+        <span>Length (L)</span>
+        <span class="slider-value" id="val-L">8</span>
+      </label>
+      <input type="range" class="param-slider" data-param="L"
+             min="1" max="20" value="8" step="0.5">
+    </div>
+
+    <div class="slider-group">
+      <label class="slider-label">
+        <span>Width (w)</span>
+        <span class="slider-value" id="val-w">7</span>
+      </label>
+      <input type="range" class="param-slider" data-param="w"
+             min="1" max="20" value="7" step="0.5">
+    </div>
+
+    <div class="slider-group">
+      <label class="slider-label">
+        <span>B</span>
+        <span class="slider-value" id="val-B">3.5</span>
+      </label>
+      <input type="range" class="param-slider" data-param="B"
+             min="1" max="10" value="3.5" step="0.5">
+    </div>
+
+    <div class="slider-group">
+      <label class="slider-label">
+        <span>DL4</span>
+        <span class="slider-value" id="val-DL4">5</span>
+      </label>
+      <input type="range" class="param-slider" data-param="DL4"
+             min="1" max="10" value="5" step="0.5">
+    </div>
+
+    <span class="control-section-title">Resolution</span>
+
+    <div class="slider-group">
+      <label class="slider-label">
+        <span>X Resolution</span>
+        <span class="slider-value" id="val-seq01">0.05</span>
+      </label>
+      <input type="range" class="param-slider" data-param="seq01"
+             min="0.01" max="0.2" value="0.05" step="0.01">
+    </div>
+
+    <div class="slider-group">
+      <label class="slider-label">
+        <span>Smoothness</span>
+        <span class="slider-value" id="val-seq02">2</span>
+      </label>
+      <input type="range" class="param-slider" data-param="seq02"
+             min="1" max="15" value="2" step="1">
+    </div>
+
+    <span class="control-section-title">Appearance</span>
+
+    <div class="color-group">
+      <label for="egg-color">Color</label>
+      <input type="color" id="egg-color" value="#e67e22">
+    </div>
+  </aside>
+
+  <!-- 3D Viewport -->
+  <div id="viewport"></div>
+
+  <!-- Info Overlay (replaces b.r.a.i.n. engine) -->
+  <div id="info-overlay" class="info-overlay hidden">
+    <h2>Universal Egg Shape Formula</h2>
+    <p>
+      Visualization of the formula from
+      <a href="https://doi.org/10.1111/nyas.14680" target="_blank" rel="noopener">
+        "Egg and math: introducing a universal formula for egg shape"
+      </a>
+      by Narushin, Romanov &amp; Griffin (2020).
+    </p>
+    <div class="formula" id="formula-container"></div>
+    <p>
+      The egg profile is defined by four measurable parameters:
+      <strong>L</strong> (length), <strong>w</strong> (max width),
+      <strong>B</strong> (asymmetry distance), and <strong>DL4</strong>
+      (diameter at quarter length). The 3D shape is generated as a
+      surface of revolution around the longitudinal axis.
+    </p>
+    <div class="brain-title">B.R.A.I.N.</div>
+    <p class="brain-desc">
+      Biological Reinforced Artificial Intelligence Network &mdash;
+      set savant_mode=true and visualize with your inner eye.
+    </p>
+  </div>
+
+  <!-- Loading -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <span id="loading-text">Initializing&hellip;</span>
+  </div>
+
+  <script type="module" src="/js/app.js"></script>
+  <script>
+    // Render KaTeX formula once loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      const interval = setInterval(() => {
+        if (typeof katex !== 'undefined') {
+          clearInterval(interval);
+          const container = document.getElementById('formula-container');
+          if (container) {
+            katex.render(
+              String.raw`y(x) = \frac{B}{2}\sqrt{\frac{L^2 - 4x^2}{L^2 + 8wx + 4w^2}} \cdot \left(1 - T_{21} \cdot T_{22}(x)\right)`,
+              container,
+              { displayMode: true, throwOnError: false }
+            );
+          }
+        }
+      }, 100);
+    });
+  </script>
+</body>
+</html>

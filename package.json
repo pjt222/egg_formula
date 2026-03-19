@@ -1,0 +1,22 @@
+{
+  "name": "eggplotr",
+  "version": "2.0.0",
+  "description": "Universal egg shape formula visualizer — Narushin, Romanov & Griffin (2020)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "author": "Philipp Thoss <ph.thoss@gmx.de>",
+  "license": "MIT",
+  "dependencies": {
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0"
+  }
+}
