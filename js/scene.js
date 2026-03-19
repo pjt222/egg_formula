@@ -14,7 +14,9 @@ let animationId = null;
  */
 export function initScene(container) {
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x0a0a0f);
+  const bgColor = getComputedStyle(document.documentElement)
+    .getPropertyValue('--bg-primary').trim() || '#0a0a0f';
+  scene.background = new THREE.Color(bgColor);
 
   const width = container.clientWidth;
   const height = container.clientHeight;
