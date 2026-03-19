@@ -44,6 +44,7 @@ export const PALETTES = {
   plasma: PLASMA,
   inferno: INFERNO,
   cividis: CIVIDIS,
+  iridescent: 'iridescent',
 };
 
 export const PALETTE_NAMES = Object.keys(PALETTES);
@@ -80,7 +81,7 @@ export function samplePalette(palette, t) {
  * @param {THREE.BufferGeometry} geometry
  * @param {number[][]} palette  - One of the palette arrays
  */
-export function applyVertexColors(geometry, palette) {
+export function applyVertexColors(geometry, palette, inverted = false) {
   const position = geometry.getAttribute('position');
   const count = position.count;
   const colors = new Float32Array(count * 3);
@@ -96,7 +97,8 @@ export function applyVertexColors(geometry, palette) {
   const rangeY = maxY - minY || 1;
 
   for (let i = 0; i < count; i++) {
-    const t = (position.getY(i) - minY) / rangeY;
+    let t = (position.getY(i) - minY) / rangeY;
+    if (inverted) t = 1 - t;
     const c = samplePalette(palette, t);
     colors[i * 3] = c.r;
     colors[i * 3 + 1] = c.g;

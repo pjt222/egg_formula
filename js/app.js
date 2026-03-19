@@ -7,7 +7,7 @@ import { DEFAULTS } from './egg-formula.js';
 
 // ── State ───────────────────────────────────────────────────────────
 let currentMode = 'surface';
-let params = { ...DEFAULTS, palette: 'solid' };
+let params = { ...DEFAULTS, palette: 'solid', inverted: false };
 let debounceTimer = null;
 
 // ── DOM References ──────────────────────────────────────────────────
@@ -70,16 +70,49 @@ if (colorInput) {
 
 // ── Palette Selector ────────────────────────────────────────────────
 const paletteSelect = document.getElementById('palette-select');
+const invertBtn = document.getElementById('btn-invert-palette');
+
+/** Update visibility of color picker and invert button based on palette. */
+function updatePaletteControls() {
+  const isIridescent = params.palette === 'iridescent';
+  const isSolid = params.palette === 'solid';
+
+  // Hide color picker when using a gradient palette or iridescent
+  if (colorGroup) {
+    colorGroup.style.display = isSolid ? '' : 'none';
+  }
+  // Hide invert button for solid and iridescent (no palette to invert)
+  if (invertBtn) {
+    invertBtn.style.display = (isSolid || isIridescent) ? 'none' : '';
+  }
+}
+
 if (paletteSelect) {
   paletteSelect.addEventListener('change', () => {
     params.palette = paletteSelect.value;
-    // Hide color picker when using a gradient palette
-    if (colorGroup) {
-      colorGroup.style.display = params.palette === 'solid' ? '' : 'none';
+    // Reset inversion when switching palettes
+    params.inverted = false;
+    if (invertBtn) {
+      invertBtn.classList.remove('active');
+      invertBtn.setAttribute('aria-pressed', 'false');
     }
+    updatePaletteControls();
     onParamChange();
   });
 }
+
+// ── Palette Inversion Toggle ─────────────────────────────────────────
+if (invertBtn) {
+  invertBtn.addEventListener('click', () => {
+    params.inverted = !params.inverted;
+    invertBtn.classList.toggle('active', params.inverted);
+    invertBtn.setAttribute('aria-pressed', params.inverted);
+    onParamChange();
+  });
+}
+
+// Initial control visibility
+updatePaletteControls();
 
 // ── Auto-Rotate Toggle ──────────────────────────────────────────────
 const autoRotateBtn = document.getElementById('btn-auto-rotate');
@@ -123,5 +156,8 @@ document.addEventListener('keydown', (e) => {
   }
   if (e.key === 'r' || e.key === 'R') {
     autoRotateBtn?.click();
+  }
+  if (e.key === 'i' || e.key === 'I') {
+    invertBtn?.click();
   }
 });

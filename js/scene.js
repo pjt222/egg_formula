@@ -1,13 +1,15 @@
 /**
  * Three.js scene setup — renderer, camera, OrbitControls, lights,
- * egg group, auto-rotate, animation loop, resize.
+ * egg group, auto-rotate, iridescent animation, animation loop, resize.
  */
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { updateIridescentMaterials } from './iridescent.js';
 
 let renderer, scene, camera, controls;
 let eggGroup;
 let autoRotateEnabled = false;
+const clock = new THREE.Clock();
 
 /**
  * Initialize the Three.js scene inside the given container element.
@@ -68,12 +70,17 @@ export function initScene(container) {
   function animate() {
     requestAnimationFrame(animate);
 
+    const elapsedTime = clock.getElapsedTime();
+
     // Auto-rotate: orbit camera around Y + tumble egg on X and Z
     controls.autoRotate = autoRotateEnabled;
     if (autoRotateEnabled) {
       eggGroup.rotation.x += 0.002;
       eggGroup.rotation.z += 0.001;
     }
+
+    // Animate iridescent materials (no-op when none present)
+    updateIridescentMaterials(eggGroup, elapsedTime);
 
     controls.update();
     renderer.render(scene, camera);
