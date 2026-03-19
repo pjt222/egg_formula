@@ -1,11 +1,13 @@
 /**
- * Three.js scene setup — renderer, camera, OrbitControls, lights, animation loop, resize.
+ * Three.js scene setup — renderer, camera, OrbitControls, lights,
+ * egg group, auto-rotate, animation loop, resize.
  */
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 let renderer, scene, camera, controls;
-let animationId = null;
+let eggGroup;
+let autoRotateEnabled = false;
 
 /**
  * Initialize the Three.js scene inside the given container element.
@@ -34,6 +36,11 @@ export function initScene(container) {
   controls.dampingFactor = 0.08;
   controls.minDistance = 2;
   controls.maxDistance = 100;
+  controls.autoRotateSpeed = 2.0;
+
+  // Egg group — all egg objects go here for coordinated rotation
+  eggGroup = new THREE.Group();
+  scene.add(eggGroup);
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0x404060, 1.2);
@@ -59,7 +66,15 @@ export function initScene(container) {
 
   // Animation loop
   function animate() {
-    animationId = requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
+
+    // Auto-rotate: orbit camera around Y + tumble egg on X and Z
+    controls.autoRotate = autoRotateEnabled;
+    if (autoRotateEnabled) {
+      eggGroup.rotation.x += 0.002;
+      eggGroup.rotation.z += 0.001;
+    }
+
     controls.update();
     renderer.render(scene, camera);
   }
@@ -69,12 +84,24 @@ export function initScene(container) {
 }
 
 /**
- * Remove all meshes/points from the scene (preserving lights and camera).
+ * Toggle auto-rotate on/off.
+ * @param {boolean} enabled
+ */
+export function setAutoRotate(enabled) {
+  autoRotateEnabled = enabled;
+}
+
+export function getAutoRotate() {
+  return autoRotateEnabled;
+}
+
+/**
+ * Remove all meshes/points from the egg group (preserving lights and camera).
  */
 export function clearObjects() {
-  if (!scene) return;
+  if (!eggGroup) return;
   const toRemove = [];
-  scene.traverse((child) => {
+  eggGroup.traverse((child) => {
     if (child.isMesh || child.isPoints) {
       toRemove.push(child);
     }
@@ -88,16 +115,16 @@ export function clearObjects() {
         obj.material.dispose();
       }
     }
-    scene.remove(obj);
+    eggGroup.remove(obj);
   });
 }
 
 /**
- * Add an Object3D to the scene.
+ * Add an Object3D to the egg group.
  * @param {THREE.Object3D} object
  */
 export function addObject(object) {
-  if (scene) scene.add(object);
+  if (eggGroup) eggGroup.add(object);
 }
 
 export function getScene() { return scene; }

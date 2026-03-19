@@ -107,6 +107,30 @@ body::after {
   outline-offset: 2px;
 }
 
+#btn-auto-rotate {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background var(--transition-speed), border-color var(--transition-speed);
+}
+
+#btn-auto-rotate:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--text-accent);
+  color: var(--text-accent);
+}
+
+#btn-auto-rotate.active {
+  border-color: var(--text-accent);
+  color: var(--text-accent);
+  text-shadow: var(--glow-cyan);
+}
+
 /* ── Panel Toggle ─────────────────────────────────────────────────── */
 .panel-toggle {
   position: fixed;
@@ -262,6 +286,32 @@ input[type="color"]::-webkit-color-swatch-wrapper {
 input[type="color"]::-webkit-color-swatch {
   border: none;
   border-radius: 2px;
+}
+
+/* ── Palette Select ───────────────────────────────────────────────── */
+#palette-select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 5px 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+  transition: border-color var(--transition-speed);
+}
+
+#palette-select:hover,
+#palette-select:focus {
+  border-color: var(--text-accent);
+  color: var(--text-accent);
+}
+
+#palette-select option {
+  background: #0a0a0f;
+  color: var(--text-primary);
 }
 
 /* ── Viewport ─────────────────────────────────────────────────────── */

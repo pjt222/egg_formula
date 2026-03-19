@@ -1,13 +1,13 @@
 /**
  * Application entry point — initializes scene, wires controls, handles mode switching.
  */
-import { initScene } from './scene.js';
+import { initScene, setAutoRotate, getAutoRotate } from './scene.js';
 import { renderEgg } from './engines.js';
 import { DEFAULTS } from './egg-formula.js';
 
 // ── State ───────────────────────────────────────────────────────────
 let currentMode = 'surface';
-let params = { ...DEFAULTS };
+let params = { ...DEFAULTS, palette: 'solid' };
 let debounceTimer = null;
 
 // ── DOM References ──────────────────────────────────────────────────
@@ -60,10 +60,35 @@ document.querySelectorAll('.param-slider').forEach((slider) => {
 
 // ── Color Picker ────────────────────────────────────────────────────
 const colorInput = document.getElementById('egg-color');
+const colorGroup = document.getElementById('color-group');
 if (colorInput) {
   colorInput.addEventListener('input', () => {
     params.color = colorInput.value;
     onParamChange();
+  });
+}
+
+// ── Palette Selector ────────────────────────────────────────────────
+const paletteSelect = document.getElementById('palette-select');
+if (paletteSelect) {
+  paletteSelect.addEventListener('change', () => {
+    params.palette = paletteSelect.value;
+    // Hide color picker when using a gradient palette
+    if (colorGroup) {
+      colorGroup.style.display = params.palette === 'solid' ? '' : 'none';
+    }
+    onParamChange();
+  });
+}
+
+// ── Auto-Rotate Toggle ──────────────────────────────────────────────
+const autoRotateBtn = document.getElementById('btn-auto-rotate');
+if (autoRotateBtn) {
+  autoRotateBtn.addEventListener('click', () => {
+    const next = !getAutoRotate();
+    setAutoRotate(next);
+    autoRotateBtn.classList.toggle('active', next);
+    autoRotateBtn.setAttribute('aria-pressed', next);
   });
 }
 
@@ -81,7 +106,7 @@ if (panelToggle && controlPanel) {
 
 // ── Keyboard Navigation ─────────────────────────────────────────────
 document.addEventListener('keydown', (e) => {
-  if (e.target.tagName === 'INPUT') return;
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
 
   const modes = ['surface', 'wireframe', 'points', 'info'];
   const currentIndex = modes.indexOf(currentMode);
@@ -95,5 +120,8 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
     const prevIndex = (currentIndex - 1 + modes.length) % modes.length;
     document.querySelector(`[data-mode="${modes[prevIndex]}"]`).click();
+  }
+  if (e.key === 'r' || e.key === 'R') {
+    autoRotateBtn?.click();
   }
 });

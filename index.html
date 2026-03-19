@@ -28,6 +28,7 @@
         <button role="tab" data-mode="points" aria-selected="false">Points</button>
         <button role="tab" data-mode="info" aria-selected="false">Info</button>
       </div>
+      <button id="btn-auto-rotate" aria-pressed="false" title="Auto-rotate (all axes)">Rotate</button>
     </div>
   </header>
 
@@ -98,7 +99,21 @@
 
     <span class="control-section-title">Appearance</span>
 
-    <div class="color-group">
+    <div class="slider-group">
+      <label class="slider-label">
+        <span>Palette</span>
+      </label>
+      <select id="palette-select">
+        <option value="solid" selected>Solid</option>
+        <option value="viridis">Viridis</option>
+        <option value="magma">Magma</option>
+        <option value="plasma">Plasma</option>
+        <option value="inferno">Inferno</option>
+        <option value="cividis">Cividis</option>
+      </select>
+    </div>
+
+    <div class="color-group" id="color-group">
       <label for="egg-color">Color</label>
       <input type="color" id="egg-color" value="#e67e22">
     </div>
