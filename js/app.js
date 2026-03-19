@@ -1,7 +1,15 @@
 /**
  * Application entry point — initializes scene, wires controls, handles mode switching.
  */
-import { initScene, setAutoRotate, getAutoRotate } from './scene.js';
+import {
+  initScene,
+  setAutoRotate,
+  getAutoRotate,
+  setKeyLightIntensity,
+  setKeyLightPosition,
+  setFillLightIntensity,
+  setAmbientLightIntensity,
+} from './scene.js';
 import { renderEgg } from './engines.js';
 import { DEFAULTS } from './egg-formula.js';
 
@@ -136,6 +144,30 @@ if (panelToggle && controlPanel) {
     panelToggle.setAttribute('aria-expanded', !isCollapsed);
   });
 }
+
+// ── Lighting Controls ────────────────────────────────────────────────
+let keyAzimuth = 45;
+let keyElevation = 47;
+
+const lightHandlers = {
+  'key-intensity': (value) => setKeyLightIntensity(value),
+  'key-azimuth': (value) => { keyAzimuth = value; setKeyLightPosition(keyAzimuth, keyElevation); },
+  'key-elevation': (value) => { keyElevation = value; setKeyLightPosition(keyAzimuth, keyElevation); },
+  'fill-intensity': (value) => setFillLightIntensity(value),
+  'ambient-intensity': (value) => setAmbientLightIntensity(value),
+};
+
+document.querySelectorAll('.light-slider').forEach((slider) => {
+  const key = slider.dataset.light;
+  const valueDisplay = document.getElementById(`val-${key}`);
+  const handler = lightHandlers[key];
+
+  slider.addEventListener('input', () => {
+    const value = parseFloat(slider.value);
+    if (valueDisplay) valueDisplay.textContent = slider.value;
+    if (handler) handler(value);
+  });
+});
 
 // ── Keyboard Navigation ─────────────────────────────────────────────
 document.addEventListener('keydown', (e) => {

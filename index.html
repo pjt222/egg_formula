@@ -121,6 +121,55 @@
       <label for="egg-color">Color</label>
       <input type="color" id="egg-color" value="#e67e22">
     </div>
+
+    <span class="control-section-title">Lighting</span>
+
+    <div class="slider-group">
+      <label class="slider-label">
+        <span>Key Intensity</span>
+        <span class="slider-value" id="val-key-intensity">1.5</span>
+      </label>
+      <input type="range" class="light-slider" data-light="key-intensity"
+             min="0" max="3" value="1.5" step="0.1">
+    </div>
+
+    <div class="slider-group">
+      <label class="slider-label">
+        <span title="Horizontal angle of main light">Key Azimuth</span>
+        <span class="slider-value" id="val-key-azimuth">45</span>
+      </label>
+      <input type="range" class="light-slider" data-light="key-azimuth"
+             min="0" max="360" value="45" step="5"
+             aria-label="Key light azimuth: horizontal angle around the egg">
+    </div>
+
+    <div class="slider-group">
+      <label class="slider-label">
+        <span title="Vertical angle of main light above horizon">Key Elevation</span>
+        <span class="slider-value" id="val-key-elevation">47</span>
+      </label>
+      <input type="range" class="light-slider" data-light="key-elevation"
+             min="-90" max="90" value="47" step="5"
+             aria-label="Key light elevation: vertical angle above horizontal">
+    </div>
+
+    <div class="slider-group">
+      <label class="slider-label">
+        <span>Fill Intensity</span>
+        <span class="slider-value" id="val-fill-intensity">0.3</span>
+      </label>
+      <input type="range" class="light-slider" data-light="fill-intensity"
+             min="0" max="1" value="0.3" step="0.05">
+    </div>
+
+    <div class="slider-group">
+      <label class="slider-label">
+        <span>Ambient Intensity</span>
+        <span class="slider-value" id="val-ambient-intensity">1.2</span>
+      </label>
+      <input type="range" class="light-slider" data-light="ambient-intensity"
+             min="0" max="3" value="1.2" step="0.1">
+    </div>
   </aside>
 
   <!-- 3D Viewport -->

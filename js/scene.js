@@ -11,6 +11,10 @@ let eggGroup;
 let autoRotateEnabled = false;
 const clock = new THREE.Clock();
 
+// Light references for external control
+let keyLight, fillLight, ambientLight;
+const KEY_LIGHT_RADIUS = 20.6; // distance from origin (preserved from original position)
+
 /**
  * Initialize the Three.js scene inside the given container element.
  * @param {HTMLElement} container
@@ -45,14 +49,14 @@ export function initScene(container) {
   scene.add(eggGroup);
 
   // Lighting
-  const ambientLight = new THREE.AmbientLight(0x404060, 1.2);
+  ambientLight = new THREE.AmbientLight(0x404060, 1.2);
   scene.add(ambientLight);
 
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
-  directionalLight.position.set(10, 15, 10);
-  scene.add(directionalLight);
+  keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
+  keyLight.position.set(10, 15, 10);
+  scene.add(keyLight);
 
-  const fillLight = new THREE.DirectionalLight(0x00f0ff, 0.3);
+  fillLight = new THREE.DirectionalLight(0x00f0ff, 0.3);
   fillLight.position.set(-10, -5, -10);
   scene.add(fillLight);
 
@@ -132,6 +136,49 @@ export function clearObjects() {
  */
 export function addObject(object) {
   if (eggGroup) eggGroup.add(object);
+}
+
+// ── Light Controls ──────────────────────────────────────────────────
+
+/**
+ * Set key light intensity.
+ * @param {number} intensity
+ */
+export function setKeyLightIntensity(intensity) {
+  if (keyLight) keyLight.intensity = intensity;
+}
+
+/**
+ * Set key light position from azimuth and elevation angles.
+ * @param {number} azimuthDeg  - Horizontal angle in degrees (0 = +Z axis, CW)
+ * @param {number} elevationDeg - Vertical angle in degrees above horizontal
+ */
+export function setKeyLightPosition(azimuthDeg, elevationDeg) {
+  if (!keyLight) return;
+  const azimuth = azimuthDeg * (Math.PI / 180);
+  const elevation = elevationDeg * (Math.PI / 180);
+  const cosEl = Math.cos(elevation);
+  keyLight.position.set(
+    KEY_LIGHT_RADIUS * cosEl * Math.sin(azimuth),
+    KEY_LIGHT_RADIUS * Math.sin(elevation),
+    KEY_LIGHT_RADIUS * cosEl * Math.cos(azimuth),
+  );
+}
+
+/**
+ * Set fill light intensity.
+ * @param {number} intensity
+ */
+export function setFillLightIntensity(intensity) {
+  if (fillLight) fillLight.intensity = intensity;
+}
+
+/**
+ * Set ambient light intensity.
+ * @param {number} intensity
+ */
+export function setAmbientLightIntensity(intensity) {
+  if (ambientLight) ambientLight.intensity = intensity;
 }
 
 export function getScene() { return scene; }
