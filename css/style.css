@@ -107,6 +107,7 @@ body::after {
   outline-offset: 2px;
 }
 
+#btn-export,
 #btn-auto-rotate {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -119,6 +120,7 @@ body::after {
   transition: background var(--transition-speed), border-color var(--transition-speed);
 }
 
+#btn-export:hover,
 #btn-auto-rotate:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: var(--text-accent);
