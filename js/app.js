@@ -12,6 +12,7 @@ import {
 } from './scene.js';
 import { renderEgg } from './engines.js';
 import { DEFAULTS } from './egg-formula.js';
+import { exportJSON } from './export.js';
 
 // ── State ───────────────────────────────────────────────────────────
 let currentMode = 'surface';
@@ -168,6 +169,14 @@ document.querySelectorAll('.light-slider').forEach((slider) => {
     if (handler) handler(value);
   });
 });
+
+// ── Export Button ───────────────────────────────────────────────────
+const exportBtn = document.getElementById('btn-export');
+if (exportBtn) {
+  exportBtn.addEventListener('click', () => {
+    exportJSON(params, currentMode);
+  });
+}
 
 // ── Keyboard Navigation ─────────────────────────────────────────────
 document.addEventListener('keydown', (e) => {
