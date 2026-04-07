@@ -1,5 +1,5 @@
 /**
- * Mathematical core — port of the Narushin et al. (2020) universal egg shape formula.
+ * Mathematical core — port of the Narushin et al. (2021) universal egg shape formula.
  * Source: archive/shiny/eggplotr/R/egg_coords.R
  *
  * @see https://doi.org/10.1111/nyas.14680

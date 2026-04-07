@@ -61,7 +61,9 @@ export function exportJSON(params, mode) {
   const a = document.createElement('a');
   a.href = url;
   a.download = `eggplotr-export-${Date.now()}.json`;
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
 
-  URL.revokeObjectURL(url);
+  setTimeout(() => URL.revokeObjectURL(url), 0);
 }
