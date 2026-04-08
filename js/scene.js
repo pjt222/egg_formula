@@ -33,7 +33,7 @@ export function initScene(container) {
   camera.position.set(12, 8, 12);
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(width, height);
   container.appendChild(renderer.domElement);
 
@@ -60,15 +60,23 @@ export function initScene(container) {
   fillLight.position.set(-10, -5, -10);
   scene.add(fillLight);
 
-  // Resize handler
+  // Resize handler (debounced for mobile orientation changes)
+  let resizeTimer = null;
   const onResize = () => {
-    const w = container.clientWidth;
-    const h = container.clientHeight;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize(w, h);
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      if (w === 0 || h === 0) return;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(w, h);
+    }, 50);
   };
   window.addEventListener('resize', onResize);
+  window.addEventListener('orientationchange', onResize);
+  window.visualViewport?.addEventListener('resize', onResize);
 
   // Animation loop
   function animate() {

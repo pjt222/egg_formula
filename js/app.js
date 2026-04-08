@@ -134,15 +134,51 @@ if (autoRotateBtn) {
   });
 }
 
-// ── Panel Toggle (mobile) ───────────────────────────────────────────
+// ── Panel Toggle ────────────────────────────────────────────────────
 const panelToggle = document.getElementById('panel-toggle');
 const controlPanel = document.getElementById('control-panel');
+
+function isMobileView() {
+  return window.matchMedia('(max-width: 768px)').matches;
+}
+
+/** Sync panel state with CSS expectations (desktop uses .collapsed, mobile defaults hidden). */
+function initPanelState() {
+  if (isMobileView()) {
+    // Mobile: panel starts closed (CSS has transform: translateX(-100%))
+    controlPanel.classList.add('collapsed');
+    panelToggle.classList.add('collapsed');
+    panelToggle.setAttribute('aria-expanded', 'false');
+    panelToggle.innerHTML = '&#9654;';
+  } else {
+    controlPanel.classList.remove('collapsed');
+    panelToggle.classList.remove('collapsed');
+    panelToggle.setAttribute('aria-expanded', 'true');
+    panelToggle.innerHTML = '&#9664;';
+  }
+}
+
 if (panelToggle && controlPanel) {
+  initPanelState();
+  window.matchMedia('(max-width: 768px)').addEventListener('change', initPanelState);
+
   panelToggle.addEventListener('click', () => {
     controlPanel.classList.toggle('collapsed');
     panelToggle.classList.toggle('collapsed');
     const isCollapsed = controlPanel.classList.contains('collapsed');
     panelToggle.setAttribute('aria-expanded', !isCollapsed);
+    panelToggle.innerHTML = isCollapsed ? '&#9654;' : '&#9664;';
+  });
+
+  // Close panel on outside tap (mobile only)
+  document.addEventListener('click', (e) => {
+    if (!isMobileView()) return;
+    if (controlPanel.classList.contains('collapsed')) return;
+    if (controlPanel.contains(e.target) || panelToggle.contains(e.target)) return;
+    controlPanel.classList.add('collapsed');
+    panelToggle.classList.add('collapsed');
+    panelToggle.setAttribute('aria-expanded', 'false');
+    panelToggle.innerHTML = '&#9654;';
   });
 }
 
