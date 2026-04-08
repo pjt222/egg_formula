@@ -160,6 +160,7 @@ function initPanelState() {
 
 if (panelToggle && controlPanel) {
   initPanelState();
+  window.matchMedia('(max-width: 768px)').addEventListener('change', initPanelState);
 
   panelToggle.addEventListener('click', () => {
     controlPanel.classList.toggle('collapsed');

@@ -75,7 +75,8 @@ export function initScene(container) {
     }, 50);
   };
   window.addEventListener('resize', onResize);
-  screen.orientation?.addEventListener('change', onResize);
+  window.addEventListener('orientationchange', onResize);
+  window.visualViewport?.addEventListener('resize', onResize);
 
   // Animation loop
   function animate() {

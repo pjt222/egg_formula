@@ -388,7 +388,7 @@ input[type="color"]::-webkit-color-swatch {
   justify-content: center;
   padding: 40px;
   text-align: center;
-  pointer-events: none;
+  pointer-events: auto;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -499,6 +499,7 @@ input[type="color"]::-webkit-color-swatch {
 @media (max-width: 768px) {
   :root {
     --panel-width: 240px;
+    --header-height: 84px;
   }
 
   .control-panel {
@@ -569,6 +570,7 @@ input[type="color"]::-webkit-color-swatch {
 @media (max-width: 480px) {
   :root {
     --panel-width: 220px;
+    --header-height: 88px;
   }
 
   .header-controls {
